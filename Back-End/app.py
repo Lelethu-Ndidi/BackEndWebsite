@@ -22,7 +22,7 @@ def init_sqlite_db():
     conn.execute("CREATE TABLE IF NOT EXISTS customers(userID INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, email TEXT, addr TEXT, password TEXT)")
     print("customers table was created")
 
-    conn.execute("CREATE TABLE IF NOT EXISTS products(ID INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, reviews TEXT, description TEXT, price TEXT, image TEXT)")
+    conn.execute("CREATE TABLE IF NOT EXISTS products(ID INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, reviews TEXT, description TEXT, price TEXT, image1 TEXT, image2 TEXT)")
     print("Products was created")
 
     cur = conn.cursor()
@@ -53,7 +53,7 @@ def add_new_record():
             msg = name + " successfully added to the table."
     except Exception as e:
         con.rollback()
-        msg = "Error occured in insert operation " + str(e)
+        msg = "Error occurred in insert operation " + str(e)
     finally:
         con.close()
         return {'msg': msg}
@@ -80,17 +80,17 @@ def insert_products():
         with sqlite3.connect(database_name) as con:
             con.row_factory = dict_factory
             cur = con.cursor()
-            cur.execute("INSERT INTO products(name, description, price, image) VALUES('Jump Suit', 'Jean Jump made with Jean. \n', R250, 'https://i.postimg.cc/P5g6btBQ/gqithiso.jpg')")
-            cur.execute("INSERT INTO products(name, description, price, image) VALUES('Shirt', ' Summer Shirt.\n', R120,'https://i.postimg.cc/4dxV2pgM/ntando-Shirt.jpg')")
-            cur.execute("INSERT INTO products(name, description, price, image) VALUES('Swimming Costume', '! price all in one Swimming costume available.\n', 'R150', 'https://i.postimg.cc/rprm0D97/andy.jpg')")
-            cur.execute("INSERT INTO products(name, description, price, image) VALUES('Poloneck', 'Winter poloneck made with wool.\n', 'R150', 'https://i.postimg.cc/NjC8shQ9/mixednuts.jpg')")
-            cur.execute("INSERT INTO products(name, description, price, image) VALUES('Skirt', 'Plitted skirt.\n','R100', 'https://i.postimg.cc/vHVwLyNM/pumpkinseeds.jpg')")
-            cur.execute("INSERT INTO products(name, description, price, image) VALUES('Short with T-Shirt', 'This short comes with t-shirt.\n','R300', 'https://i.postimg.cc/KzfBHCp8/cashewnuts1.jpg')")
-            cur.execute("INSERT INTO products(name, description, price, image) VALUES('Short Dress', 'Short, tight black dress.\n','R150', 'https://i.postimg.cc/wBZD8hgS/driedpeaches.png')")
-            cur.execute("INSERT INTO products(name, description, price, image) VALUES('T-shirt', 'White T-Shirt also available in the other colors.\n','R100', 'https://i.postimg.cc/7YysWtM8/pecan.png')")
-            cur.execute("INSERT INTO products(name, description, price, image) VALUES('Dress', 'Long stripped dress .\n','R120', 'https://i.postimg.cc/Pr2xR9sP/peanuts.png')")
-            cur.execute("INSERT INTO products(name, description, price, image) VALUES('Leather Jacket', 'Leather Jacket vailable in 3 colors black, brown and white.\n','R180', 'https://i.postimg.cc/63vW9V6Z/cranberries.png')")
-            cur.execute("INSERT INTO products(name, description, price, image) VALUES('Long Jacket', 'Long Cream Jacket.\n','R140', 'https://i.postimg.cc/Nf5MZbgD/sunflowerseeds.png')")
+            cur.execute("INSERT INTO products(name, description, price, image1,image2) VALUES('Jump Suit', 'Jean Jump made with Jean. \n', R250, 'https://i.postimg.cc/P5g6btBQ/gqithiso.jpg','https://i.postimg.cc/pdk4RZwZ/simkiniwe.jpg')")
+            cur.execute("INSERT INTO products(name, description, price, image1,image2) VALUES('Shirt', ' Summer Shirt.\n', R120,'https://i.postimg.cc/4dxV2pgM/ntando-Shirt.jpg','https://i.postimg.cc/1zY37jrB/ntiro2-Shirt.jpg')")
+            cur.execute("INSERT INTO products(name, description, price, image1,image2) VALUES('Swimming Costume', '! price all in one Swimming costume available.\n', 'R150', 'https://i.postimg.cc/rprm0D97/andy.jpg','https://i.postimg.cc/QM9BQ4j4/andyMjk.jpg')")
+            cur.execute("INSERT INTO products(name, description, price, image1,image2) VALUES('Poloneck', 'Winter poloneck made with wool.\n', 'R150', 'https://i.postimg.cc/3RGh9pQR/lucifer.jpg','https://i.postimg.cc/8ccypgRk/Wara.jpg')")
+            cur.execute("INSERT INTO products(name, description, price, image1,image2) VALUES('Skirt', 'Pleated skirt.\n','R100', 'https://i.postimg.cc/Wz8xfLRm/zezzy.jpg','https://i.postimg.cc/J0k4Lr8L/zezethu.jpg')")
+            cur.execute("INSERT INTO products(name, description, price, image1,image2) VALUES('Short with T-Shirt', 'This short comes with t-shirt.\n','R300', 'https://i.postimg.cc/CKfwMD4F/tyaliti-Mr.jpg','https://i.postimg.cc/gkkdX1Kt/mr-Tyaliti.jpg')")
+            cur.execute("INSERT INTO products(name, description, price, image1,image2) VALUES('Short Dress', 'Short, tight black dress.\n','R150', 'https://i.postimg.cc/HWSYB0jb/sinyonyo.jpg' ,'https://i.postimg.cc/cL3dxVhc/sinokuhle.jpg')")
+            cur.execute("INSERT INTO products(name, description, price, image1,image2) VALUES('T-shirt', 'White T-Shirt also available in the other colors.\n','R100', 'https://i.postimg.cc/0j9Ls4Qc/lumkileM.jpg', 'https://i.postimg.cc/BQ6VBH1L/lulu.jpg')")
+            cur.execute("INSERT INTO products(name, description, price, image1,image2) VALUES('Dress', 'Long stripped dress .\n','R120', 'https://i.postimg.cc/DZMn54FM/jazz.jpg','https://i.postimg.cc/JzQKwhJV/jazznella.jpg')")
+            cur.execute("INSERT INTO products(name, description, price, image1,image2) VALUES('Leather Jacket', 'Leather Jacket available in 3 colors black, brown and white.\n','R180', 'https://i.postimg.cc/rzXqrpyB/ntandoJacket.jpg','https://i.postimg.cc/sDhXDkDF/ntiro-Jacket.jpg')")
+            cur.execute("INSERT INTO products(name, description, price, image1,image2) VALUES('Long Jacket', 'Long Cream Jacket.\n','R140', 'hhttps://i.postimg.cc/m2VgC2wm/zeni.jpg','https://i.postimg.cc/kGphPSCj/zeeMdee.jpg')")
             con.commit()
             msg= 'Record successfully added.'
     except Exception as e:
@@ -143,7 +143,8 @@ if __name__=='__main__':
 #                 SET name=?,
 #                     price=?,
 #                     description=?,
-#                     image1=?
+#                     image1=?,
+#                     image2=?
 #                 WHERE id=? """
 #
 #         post_data = request.get_json()
@@ -151,11 +152,13 @@ if __name__=='__main__':
 #         price = post_data['price']
 #         description = post_data['description']
 #         image1 = post_data['image1']
+#         image2 = post_data['image2']
 #         updated_product = {
 #             "name": name,
 #             "price": price,
 #             "description": description,
 #             "image1": image1,
+#             "image2 = image2"
 #         }
 #         conn.execute(sql, (name, price, description, image1))
 #         conn.commit()
