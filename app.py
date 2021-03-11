@@ -22,7 +22,7 @@ def init_sqlite_db():
     conn.execute("CREATE TABLE IF NOT EXISTS customers(userID INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, email TEXT, addr TEXT, password TEXT)")
     print("customers table was created")
 
-    conn.execute("CREATE TABLE IF NOT EXISTS products(ID INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, reviews TEXT, description TEXT, price TEXT, image1 TEXT, image2 TEXT)")
+    conn.execute("CREATE TABLE IF NOT EXISTS products(ID INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, description TEXT, rate TEXT, price TEXT, image1 TEXT, image2 TEXT)")
     print("Products was created")
 
     cur = conn.cursor()
@@ -76,29 +76,22 @@ def list_customers():
 
 @app.route('/products/', methods = ['POST'])
 def insert_products():
-    try:
-        with sqlite3.connect(database_name) as con:
-            con.row_factory = dict_factory
-            cur = con.cursor()
-            cur.execute("INSERT INTO products(name, description, price, image1,image2) VALUES('Jump Suit', 'Jean Jump made with Jean. \n', R250, 'https://i.postimg.cc/P5g6btBQ/gqithiso.jpg','https://i.postimg.cc/pdk4RZwZ/simkiniwe.jpg')")
-            cur.execute("INSERT INTO products(name, description, price, image1,image2) VALUES('Shirt', ' Summer Shirt.\n', R120,'https://i.postimg.cc/4dxV2pgM/ntando-Shirt.jpg','https://i.postimg.cc/1zY37jrB/ntiro2-Shirt.jpg')")
-            cur.execute("INSERT INTO products(name, description, price, image1,image2) VALUES('Swimming Costume', '! price all in one Swimming costume available.\n', 'R150', 'https://i.postimg.cc/rprm0D97/andy.jpg','https://i.postimg.cc/QM9BQ4j4/andyMjk.jpg')")
-            cur.execute("INSERT INTO products(name, description, price, image1,image2) VALUES('Poloneck', 'Winter poloneck made with wool.\n', 'R150', 'https://i.postimg.cc/3RGh9pQR/lucifer.jpg','https://i.postimg.cc/8ccypgRk/Wara.jpg')")
-            cur.execute("INSERT INTO products(name, description, price, image1,image2) VALUES('Skirt', 'Pleated skirt.\n','R100', 'https://i.postimg.cc/Wz8xfLRm/zezzy.jpg','https://i.postimg.cc/J0k4Lr8L/zezethu.jpg')")
-            cur.execute("INSERT INTO products(name, description, price, image1,image2) VALUES('Short with T-Shirt', 'This short comes with t-shirt.\n','R300', 'https://i.postimg.cc/CKfwMD4F/tyaliti-Mr.jpg','https://i.postimg.cc/gkkdX1Kt/mr-Tyaliti.jpg')")
-            cur.execute("INSERT INTO products(name, description, price, image1,image2) VALUES('Short Dress', 'Short, tight black dress.\n','R150', 'https://i.postimg.cc/HWSYB0jb/sinyonyo.jpg' ,'https://i.postimg.cc/cL3dxVhc/sinokuhle.jpg')")
-            cur.execute("INSERT INTO products(name, description, price, image1,image2) VALUES('T-shirt', 'White T-Shirt also available in the other colors.\n','R100', 'https://i.postimg.cc/0j9Ls4Qc/lumkileM.jpg', 'https://i.postimg.cc/BQ6VBH1L/lulu.jpg')")
-            cur.execute("INSERT INTO products(name, description, price, image1,image2) VALUES('Dress', 'Long stripped dress .\n','R120', 'https://i.postimg.cc/DZMn54FM/jazz.jpg','https://i.postimg.cc/JzQKwhJV/jazznella.jpg')")
-            cur.execute("INSERT INTO products(name, description, price, image1,image2) VALUES('Leather Jacket', 'Leather Jacket available in 3 colors black, brown and white.\n','R180', 'https://i.postimg.cc/rzXqrpyB/ntandoJacket.jpg','https://i.postimg.cc/sDhXDkDF/ntiro-Jacket.jpg')")
-            cur.execute("INSERT INTO products(name, description, price, image1,image2) VALUES('Long Jacket', 'Long Cream Jacket.\n','R140', 'hhttps://i.postimg.cc/m2VgC2wm/zeni.jpg','https://i.postimg.cc/kGphPSCj/zeeMdee.jpg')")
-            con.commit()
-            msg= 'Record successfully added.'
-    except Exception as e:
-        con.rollback()
-        msg = 'Error occurred in insert operation'+str(e)
-    finally:
-        con.close()
-    return jsonify(msg)
+    with sqlite3.connect(database_name) as con:
+        con.row_factory = dict_factory
+        cur = con.cursor()
+        cur.execute("INSERT INTO products(name, description, rate, price, image1,image2) VALUES('Jump Suit', 'Jean Jump made with Jean. \n','rate: 5/5', R250, 'https://i.postimg.cc/P5g6btBQ/gqithiso.jpg','https://i.postimg.cc/pdk4RZwZ/simkiniwe.jpg')")
+        cur.execute("INSERT INTO products(name, description, rate, price, image1,image2) VALUES('Shirt', ' Summer Shirt.\n','rate: 5/5', R120,'https://i.postimg.cc/4dxV2pgM/ntando-Shirt.jpg','https://i.postimg.cc/1zY37jrB/ntiro2-Shirt.jpg')")
+        cur.execute("INSERT INTO products(name, description, rate, price, image1,image2) VALUES('Swimming Costume', '! price all in one Swimming costume available.\n','rate: 5/5', 'R150', 'https://i.postimg.cc/rprm0D97/andy.jpg','https://i.postimg.cc/QM9BQ4j4/andyMjk.jpg')")
+        cur.execute("INSERT INTO products(name, description, rate, price, image1,image2) VALUES('Poloneck', 'Winter poloneck made with wool.\n', 'rate: 5/5','R150', 'https://i.postimg.cc/3RGh9pQR/lucifer.jpg','https://i.postimg.cc/8ccypgRk/Wara.jpg')")
+        cur.execute("INSERT INTO products(name, description, rate, price, image1,image2) VALUES('Skirt', 'Pleated skirt.\n','rate: 5/5','R100', 'https://i.postimg.cc/Wz8xfLRm/zezzy.jpg','https://i.postimg.cc/J0k4Lr8L/zezethu.jpg')")
+        cur.execute("INSERT INTO products(name, description, rate, price, image1,image2) VALUES('Short with T-Shirt', 'This short comes with t-shirt.\n','rate: 5/5','R300', 'https://i.postimg.cc/CKfwMD4F/tyaliti-Mr.jpg','https://i.postimg.cc/gkkdX1Kt/mr-Tyaliti.jpg')")
+        cur.execute("INSERT INTO products(name, description, rate, price, image1,image2) VALUES('Short Dress', 'Short, tight black dress.\n',rate: 5/5,'R150', 'https://i.postimg.cc/HWSYB0jb/sinyonyo.jpg' ,'https://i.postimg.cc/cL3dxVhc/sinokuhle.jpg')")
+        cur.execute("INSERT INTO products(name, description, rate, price, image1,image2) VALUES('T-shirt', 'White T-Shirt also available in the other colors.\n','rate: 5/5','R100', 'https://i.postimg.cc/0j9Ls4Qc/lumkileM.jpg', 'https://i.postimg.cc/BQ6VBH1L/lulu.jpg')")
+        cur.execute("INSERT INTO products(name, description, rate, price, image1,image2) VALUES('Dress', 'Long stripped dress .\n','rate: 5/5','R120', 'https://i.postimg.cc/DZMn54FM/jazz.jpg','https://i.postimg.cc/JzQKwhJV/jazznella.jpg')")
+        cur.execute("INSERT INTO products(name, description, rate, price, image1,image2) VALUES('Leather Jacket', 'Leather Jacket available in 3 colors black, brown and white.\n','rate: 5/5','R180', 'https://i.postimg.cc/rzXqrpyB/ntandoJacket.jpg','https://i.postimg.cc/sDhXDkDF/ntiro-Jacket.jpg')")
+        cur.execute("INSERT INTO products(name, description, rate, price, image1,image2) VALUES('Long Jacket', 'Long Cream Jacket.\n','rate: 5/5','R300', 'https://i.postimg.cc/m2VgC2wm/zeni.jpg','https://i.postimg.cc/kGphPSCj/zeeMdee.jpg')")
+        con.commit()
+insert_products()
 
 
 @app.route('/show-products/', methods= ['GET'])
